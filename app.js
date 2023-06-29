@@ -4,6 +4,10 @@ const exphbs = require('express-handlebars')
 const app = express()
 const port = 3000
 
+// setting database
+const mongoose = require('mongoose') 
+mongoose.connect(process.env.MONGODB_URI) 
+
 // setting template engine
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
