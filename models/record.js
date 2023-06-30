@@ -6,15 +6,15 @@ const recordSchema = new Schema({
   },
   name: {
     type: String, 
-    required: true 
+    // required: true 
   },
   date: {
     type: Date, 
-    required: true 
+    default: Date.now 
   },
   amount: {
     type: Number, 
-    required: true 
+    // required: true 
   },
   userId: {
     type: Number, 
