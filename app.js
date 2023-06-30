@@ -8,12 +8,12 @@ const port = process.env.PORT || 3000
 require('./config/mongoose.js')
 
 // setting template engine
-app.engine('handlebars', exphbs.engine({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
+app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
 
 // setting the route
 app.get('/', (req, res) => {
-  res.send('This is 老爸的私房錢yo')
+  res.render('index')
 })
 
 // Listen the server
