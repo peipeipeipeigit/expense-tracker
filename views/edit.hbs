@@ -1,0 +1,47 @@
+<div class="container d-flex justify-content-around">
+  <div class="col-6">
+    <div class="my-3 row">
+      <label for="staticEmail" class="col-sm-3 col-form-label">*必填欄位</label>
+      <div class="col-sm-9">
+        <input type="text" readonly class="form-control-plaintext text-center" value="請修改你的支出">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputItem" class="col-sm-3 col-form-label">名稱*:</label>
+      <div class="col-sm-9">
+        <input type="string" class="form-control" id="inputItem">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="inputDate" class="col-sm-3 col-form-label">日期*:</label>
+      <div class="col-sm-9">
+        <input type="date" class="form-control outline-dark" id="inputDate">
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label for="selectCategory" class="col-sm-3 col-form-label">類別*:</label>
+      <div class="col-sm-9">
+        <select class="col-sm-12 col-form-select py-2" aria-label="selectCategory">
+          <option selected>Select</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="mb-3 row">
+      <label for="inputAmount" class="col-sm-3 col-form-label">金額*:</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" id="inputAmount" onkeyup="this.value=this.value.replace(/\D/g,'')">
+      </div>
+    </div>
+    <div class="my-5 row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-9">
+        <button type="button" class="col-12 btn btn-outline-dark d-grid mx-auto addExpense">送出</button>
+      </div>
+    </div>
+  </div>
+
+</div>

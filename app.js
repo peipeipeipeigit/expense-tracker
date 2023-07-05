@@ -15,7 +15,7 @@ app.use(express.static('public'))
 
 // setting the route
 app.get('/', (req, res) => {
-  res.render('new')
+  res.render('edit')
 })
 
 
