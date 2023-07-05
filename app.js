@@ -15,8 +15,10 @@ app.use(express.static('public'))
 
 // setting the route
 app.get('/', (req, res) => {
-  res.render('index')
+  res.render('new')
 })
+
+
 
 // Listen the server
 app.listen(port, () => {
