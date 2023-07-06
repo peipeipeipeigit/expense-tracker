@@ -3,6 +3,7 @@ const express = require('express')
 const exphbs = require('express-handlebars') 
 const app = express()
 const port = process.env.PORT || 3000
+const routes = require('./routes')
 
 // require to connect database
 require('./config/mongoose.js')
@@ -14,10 +15,7 @@ app.set('view engine', 'hbs')
 app.use(express.static('public'))
 
 // setting the route
-app.get('/', (req, res) => {
-  res.render('edit')
-})
-
+app.use(routes)
 
 
 // Listen the server
