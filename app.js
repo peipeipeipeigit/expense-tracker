@@ -3,6 +3,13 @@ const express = require('express')
 const exphbs = require('express-handlebars') 
 const app = express()
 const port = process.env.PORT || 3000
+
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
+
 const routes = require('./routes')
 
 // require to connect database
