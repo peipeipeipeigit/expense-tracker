@@ -10,27 +10,27 @@ const recordSchema = new Schema({
     type: String,
     required: true
   },
-  userId: {  // 加入關聯設定
+  date: {
+    type: Date,
+    required: true
+  },
+  amount: {
+    type: Number,
+    min: [1, '金額不能為0!'],
+    required: true
+  },
+  userId: {  
     type: Schema.Types.ObjectId,
     ref: 'User',
     index: true,
-    required: false
+    required: true
   },
-  date: {
-    type: Date,
-    default: Date.now
+  categoryId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Category',
+    index: true,
+    required: true
   },
-
-  // amount: {
-  //   type: Number, 
-  //   // required: true 
-  // },
-  // userId: {
-  //   type: Number, 
-  // },
-  // categoryId: {
-  //   type: Number,
-  // },
 
 })
 

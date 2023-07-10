@@ -9,7 +9,11 @@ const categorySchema = new Schema({
     type: String,
     required: true
   },
-  
+  // 一個類別對應多筆資料
+  records: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Record'
+  }]
 })
 
 module.exports = mongoose.model('Category', categorySchema)
