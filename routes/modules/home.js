@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
   Record.find()
     .lean()
     .sort({ _id: 'asc' })
-    .then(record => res.render('index', { record }))
+    .then(records => res.render('index', { records }))
     .catch(error => console.error(error))
 })
 
