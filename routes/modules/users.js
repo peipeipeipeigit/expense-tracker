@@ -2,10 +2,12 @@ const express = require('express')
 const router = express.Router()
 
 
-router.use((req, res, next) => {
-  console.log('Time: ', Date.now())
-  next()
+router.get('/login', (req, res, next) => {
+  res.render('login')
 })
 
+router.get('/register', (req, res, next) => {
+  res.render('register')
+})
 
 module.exports = router
