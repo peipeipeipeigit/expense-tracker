@@ -17,6 +17,10 @@ require('./config/mongoose.js')
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
+// setting body-parser
+app.use(express.urlencoded({ extended: true }))
+
+// setting static files
 app.use(express.static('public'))
 
 // setting the route
