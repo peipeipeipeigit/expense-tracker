@@ -6,8 +6,7 @@ if (process.env.NODE_ENV !== 'production') {
 const db = require('../../config/mongoose')
 
 db.once('open', () => {
-  for (let i = 0; i < 10; i++) {
-    Category.create({ id: i, name: 'name-' + i })
-  }
-  console.log('done')
+  // Category.create({ id: i, name: 'name-' + i })
+  
+  console.log('ca done')
 })

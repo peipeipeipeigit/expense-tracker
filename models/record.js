@@ -4,7 +4,8 @@ const Schema = mongoose.Schema
 
 const recordSchema = new Schema({
   id: {
-    type: Number
+    type: Number,
+    index: true,
   },
   name: {
     type: String,
