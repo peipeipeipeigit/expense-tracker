@@ -5,6 +5,7 @@ const router = express.Router()
 const Record = require('../../models/record')
 
 router.get('/', (req, res) => {
+  
   Record.find()
     .lean()
     .sort({ _id: 'asc' })
