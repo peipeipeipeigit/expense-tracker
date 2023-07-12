@@ -1,15 +1,15 @@
 // basic setting
 const express = require('express')
 const session = require('express-session')
+const usePassport = require('./config/passport')
 const exphbs = require('express-handlebars') 
 const app = express()
 const port = process.env.PORT || 3000
+const routes = require('./routes')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-
-const routes = require('./routes')
 
 // require to connect database
 require('./config/mongoose.js')
@@ -24,6 +24,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+
+usePassport(app)
+
 
 // setting body-parser
 app.use(express.urlencoded({ extended: true }))
