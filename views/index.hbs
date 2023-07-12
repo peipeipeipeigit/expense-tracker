@@ -16,7 +16,7 @@
     </div>
     <div class="col"></div>
   </div>
- 
+
   <div class="row">
     <div class="col-3"></div>
     <div class="col g-0">
@@ -44,15 +44,17 @@
   <div class="row mt-4">
     <div class="col"></div>
     <div class="col-6 d-flex justify-content-around">
-      <button type="button" class="btn btn-warning">新增支出</button>
+      <a href="new">
+        <button type="button" class="btn btn-warning">新增支出</button>
+      </a>
     </div>
     <div class="col"></div>
   </div>
-  {{!--  --}}
+  {{!-- --}}
   <ul>
     {{#each records }}
     <li>
-      {{ records.id }}
+      {{ records.name }}
     </li>
     {{/each}}
   </ul>

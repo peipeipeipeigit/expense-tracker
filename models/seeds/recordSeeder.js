@@ -6,7 +6,6 @@ if (process.env.NODE_ENV !== 'production') {
 const db = require('../../config/mongoose')
 
 db.once('open', () => {
-  console.log('connect success')
   .then(user => {
   const userId = user._id
   return Promise.all(Array.from(
