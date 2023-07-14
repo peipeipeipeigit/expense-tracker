@@ -1,11 +1,14 @@
-const Record = require('../record')
+const bcrypt = require('bcryptjs')
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
+const Record = require('../record')
+const User = require('../user')
+// if (process.env.NODE_ENV !== 'production') {
+//   require('dotenv').config()
+// }
 const db = require('../../config/mongoose')
 
 db.once('open', () => {
+  (req, res) => {
   .then(user => {
   const userId = user._id
   return Promise.all(Array.from(
@@ -17,4 +20,4 @@ db.once('open', () => {
       console.log('done.')
       process.exit()
     })
-})
+}})
