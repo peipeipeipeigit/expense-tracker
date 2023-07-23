@@ -23,11 +23,12 @@ router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   const errors = []
 
+  // flash message推播內容條件式
   if (!name || !email || !password || !confirmPassword) {
-    errors.push({ message: '所有欄位都是必填。' })
+    errors.push({ message: 'All fields are required.' })
   }
   if (password !== confirmPassword) {
-    errors.push({ message: '密碼與確認密碼不相符！' })
+    errors.push({ message: 'Password and Confirm Password do not match!' })
   }
   if (errors.length) {
     return res.render('register', {
@@ -63,13 +64,13 @@ router.post('/register', (req, res) => {
         .then(() => res.redirect('/'))
         .catch(err => console.log(err))
     })
-  .catch(err => console.log(err))
+    .catch(err => console.log(err))
 })
 
 
 router.get('/logout', (req, res) => {
   req.logout()
-  req.flash('success_msg', '你已經成功登出。')
+  req.flash('success_msg', 'You already log out.')
   res.redirect('/users/login')
 })
 

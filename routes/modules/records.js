@@ -5,13 +5,12 @@ const passport = require('passport')
 
 const User = require('../../models/user')
 
-// 需要改寫成auth過的route
 
-router.get('/records/new', (req, res) => {
+router.get('/new', (req, res) => {
   res.render('new')
 })
 
-router.post('/', (req, res) => {
+router.post('/new', (req, res) => {
   const userId = req.user._id
   const name = req.body.name
   return Record.create({ name, userId })
