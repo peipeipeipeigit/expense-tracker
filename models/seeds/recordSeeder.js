@@ -2,9 +2,11 @@ const bcrypt = require('bcryptjs')
 
 const Record = require('../record')
 const User = require('../user')
-// if (process.env.NODE_ENV !== 'production') {
-//   require('dotenv').config()
-// }
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const db = require('../../config/mongoose')
 
 db.once('open', () => {
