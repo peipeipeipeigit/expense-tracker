@@ -61,8 +61,7 @@ const recordList = [
 db.once('open', () => {
   Promise.all(Array.from({ length: recordList.length }, (_, i) => Category.findOne({ name: recordList[i].category })))
     // 把categoryID 與 Icon 放入recordList中
-    .then((data) => {
-      console.log(data)
+    .then((data) => {      
       for (let i = 0; i < recordList.length; i++) {
         recordList[i].categoryId = data[i]._id
         recordList[i].categoryIcon = data[i].icon      

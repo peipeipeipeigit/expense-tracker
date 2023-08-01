@@ -8,11 +8,8 @@ const recordSchema = new Schema({
     required: true
   },
   date: {
-    type: Date,
+    type: String,
     required: true,
-    $dateToString: {
-      format: "%Y-%m-%d"
-    }
   },
   category: {
     type: String,

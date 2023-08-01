@@ -1,56 +1,70 @@
-<div class="container">
-
-  <div class="row my-4">
-    <div class="col"></div>
-    <div class="col-6 g-0">
-      <select class="form-select" aria-label="Default select example">
-        <option selected>類別</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-      </select>
-      <div class="d-flex justify-content-between mt-4">
-        <span>總金額：</span>
-        <span class="text-warning fw-bold fs-1">25000</span>
-      </div>
-    </div>
-    <div class="col"></div>
-  </div>
-
-  <div class="row">
-    <div class="col-3"></div>
-    <div class="col g-0">
-      <table class="table table-striped my-auto">
-        {{#each records }}
-        <tr>
-          <td class="col-1">
-            <span class="fa-solid fa-utensils col-12 fs-1 text-center py-3"></span>
-          </td>
-          <td class="col-2">
-            <p class="fs-5 text-start my-auto">{{this.name}}</p>
-            <p class="fs-6 text-start my-auto">{{this.date.YYYY}}</p>
-          </td>
-          <td class="col-1">
-            <p class="col-12 fs-5 text-center px-2 py-3 mb-0">{{this.amount}}</p>
-          </td>
-        </tr>
+<div class="container mt-5 text-center w-50">
+  <ul class="list-group">
+    <li class="list-group-item border-0">
+      <div class="dropdown w-75">
+        <button
+          class="btn btn-light btn-lg dropdown-toggle w-100 border border-secondary text-end d-flex justify-content-between align-items-center"
+          type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <p class="text-start m-0">
+            {{#if selectedCategory}}
+            {{ this.selectedCategory }}
+            {{else}}
+            類別
+            {{/if}}
+          </p>
+        </button>
+      <ul class="dropdown-menu w-100 text-center">
+        <li><a class="dropdown-item" href="/">所有類別</a></li>
+        {{#each category}}
+        <li><a class="dropdown-item" href="/{{ this.name }}">{{ this.name }}</a></li>
         {{/each}}
-      </table>
-    </div>
-    <div class="col-3 d-flex justify-content-around">
-      <button type="button" class="btn" href="">修改</button>
-      <button type="button" class="btn">刪除</button>
-    </div>
-  </div>
-
-  <div class="row mt-4">
-    <div class="col"></div>
-    <div class="col-6 d-flex justify-content-around">
-      <a href="/records/new">
-        <button type="button" class="btn btn-warning">新增支出</button>
-      </a>
-    </div>
-    <div class="col"></div>
-  </div>
-
+      </ul>
+      </div>
+    </li>
+    {{#if records}}
+    <li class="list-group-item border-start-0 border-end-0">
+      <div class="row w-75">
+        <div class="col-auto me-auto my-auto text-end">
+          <h4 class="m-0">
+            總金額：
+          </h4>
+        </div>
+        <div class="col-auto ms-5 p-0">
+          <p class="fs-1 text-warning m-0">{{ totalAmount }}</p>
+        </div>
+      </div>
+    </li>
+    {{#each records}}
+    <li class="list-group-item border-start-0 border-end-0">
+      <div class="row">
+        <div class="col-auto me-0 mt-auto">
+          <h4>
+            {{{ this.categoryIcon }}}
+          </h4>
+        </div>
+        <div class="col-auto me-auto mt-auto">
+          <div class="row">
+            <span>{{ this.name}}</span>
+          </div>
+          <div class="row">
+            <span>{{ this.date}}</span>
+          </div>
+        </div>
+        <div class="col-auto me-0 mt-auto w-25 text-end">
+          <h3>{{ this.amount}}</h3>
+        </div>
+        <div class="col-auto my-auto w-25 text-end">
+          <a class="btn btn-outline-warning" href="/records/{{ this._id }}/edit">修改</a>
+          <form action="/records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+            <button class="btn btn-outline-danger" type="submit">刪除</button>
+          </form>
+        </div>
+      </div>
+    </li>
+    {{/each}}
+    {{else}}
+    <h1 class="text-danger mt-3">查無支出紀錄</h1>
+    {{/if}}
+  </ul>
+  <a href="/records/new" class="btn btn-outline-primary d-flex justify-content-center  my-5">新增支出</a>
 </div>

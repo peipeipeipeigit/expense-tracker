@@ -1,23 +1,16 @@
+// db setting
 const express = require('express')
 const router = express.Router()
 
-const passport = require('passport')
-
+// requires models
 const User = require('../../models/user')
+const Record = require('../../models/record')
+const Category = require('../../models/category')
 
 
-router.get('/new', (req, res) => {
-  res.render('new')
-})
+// 
 
-router.post('/new', (req, res) => {
-  const userId = req.user._id
-  const name = req.body.name
-  return Record.create({ name, userId })
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
-
+// browse a specific record
 router.get('/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
@@ -27,6 +20,7 @@ router.get('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// edit a specific record
 router.get('/:id/edit', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
@@ -49,5 +43,21 @@ router.put('/:id', (req, res) => {
     .then(() => res.redirect(`/records/${_id}`))
     .catch(error => console.log(error))
 })
+
+// add a new record
+router.get('/new', (req, res) => {
+  res.render('new')
+})
+
+router.post('/new', (req, res) => {
+  const userId = req.user._id
+  const name = req.body.name
+  return Record.create({ name, userId })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+
+// delete a record
 
 module.exports = router
