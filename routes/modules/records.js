@@ -15,8 +15,7 @@ router.get('/new', (req, res) => {
 
 router.post('/new', (req, res) => {
   const userId = req.user._id
-  const { name, date, category, amount } = req.body
-  console.log(req.body)
+  const { name, date, category, amount } = req.body  
   const error = []
   if (!name || !date || !category || !amount) {
     error.push({ message: '所有欄位都是必填' })
