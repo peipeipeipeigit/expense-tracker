@@ -41,27 +41,51 @@ router.post('/new', (req, res) => {
 // edit a specific record
 router.get('/edit/:id', (req, res) => {
   const userId = req.user._id
-  const _id = req.params.id
-  return Record.findOne({ _id, userId })
+  const recordId = req.params.id
+  
+  return Record.findOne({ _id: recordId, userId })
     .lean()
-    .then(record => res.render('edit', { record }))
-    .catch(error => console.log(error))
+    .then(record => {
+      Category.findOne({ _id: record.categoryId })
+        .lean()
+        .then(category => {
+          const date = record.date  
+          res.render('edit', { record, date, recordId })
+        })  
+    })
+    .catch(console.error)
 })
 
 router.post('/edit/:id', (req, res) => {
   const userId = req.user._id
-  const _id = req.params.id
-  const { name, amount } = req.body
-  return Record.findOne({ _id, userId })
+  const { name, date, category, amount } = req.body
+  const recordId = req.params.id
+  const error = []
+  if (!name || !date || !category || !amount) {
+    const record = req.body
+    error.push({ message: '所有欄位都是必填。' })
+    return res.render('edit', {
+      error,
+      date,
+      recordId,
+      record
+    })
+  }
+  Record.findOne({ _id: recordId, userId })
     .then(record => {
       record.name = name
+      record.date = date
+      record.category = category
       record.amount = amount
-      return record.save()
+      return Category.findOne({ name: category })
+        .then(category => {
+          record.categoryIcon = category.icon
+          return record.save()
+        })
+        .then(() => res.redirect('/'))
+        .catch(console.error)
     })
-    .then(() => res.redirect(`/records/${_id}`))
-    .catch(error => console.log(error))
 })
-
 
 
 
