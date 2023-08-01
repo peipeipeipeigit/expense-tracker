@@ -18,8 +18,8 @@
 
 #環境套件
 --
-Node.js
-npm(Node Package Manager)
+#Node.js
+#npm(Node Package Manager)
 
 #建立測試資料
 --
