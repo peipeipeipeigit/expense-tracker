@@ -3,10 +3,6 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const recordSchema = new Schema({
-  id: {
-    type: Number,
-    index: true,
-  },
   name: {
     type: String,
     required: true
@@ -17,6 +13,14 @@ const recordSchema = new Schema({
     $dateToString: {
       format: "%Y-%m-%d"
     }
+  },
+  category: {
+    type: String,
+    required: true
+  },
+  categoryIcon: {
+    type: String,
+    required: true
   },
   amount: {
     type: Number,

@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 const db = require('../../config/mongoose')
 
 const Category = require('../category')
-const categories = [
+const categoryList = [
   {
     name: '家居物業',
     icon: '<i class="fa-solid fa-house"></i>'
@@ -29,12 +29,12 @@ const categories = [
 
 
 db.once('open', () => {
-  Promise.all(Array.from({ length: categories.length }, (_, i) => Category.create({
-    name: categories[i].name,
-    icon: categories[i].icon
+  Promise.all(Array.from({ length: categoryList.length }, (_, i) => Category.create({
+    name: categoryList[i].name,
+    icon: categoryList[i].icon
   })))
     .then(() => {
-      console.log('categorySeed is created!')
+      console.log('Category Seeder is created!')
       process.exit()
     })
 })
