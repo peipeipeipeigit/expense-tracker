@@ -40,6 +40,7 @@ router.post('/register', (req, res) => {
     })
   }
 
+  //檢查使用者是否存在 
   User
     .findOne({ email })
     .then(user => {
