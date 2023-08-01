@@ -42,16 +42,16 @@ router.post('/new', (req, res) => {
 router.get('/edit/:id', (req, res) => {
   const userId = req.user._id
   const recordId = req.params.id
-  
+
   return Record.findOne({ _id: recordId, userId })
     .lean()
     .then(record => {
       Category.findOne({ _id: record.categoryId })
         .lean()
         .then(category => {
-          const date = record.date  
+          const date = record.date
           res.render('edit', { record, date, recordId })
-        })  
+        })
     })
     .catch(console.error)
 })
@@ -90,5 +90,13 @@ router.post('/edit/:id', (req, res) => {
 
 
 // delete a record
+router.delete('/delete/:id', (req, res) => {
+  const userId = req.user._id
+  const recordId = req.params.id
+
+  return Record.findOneAndRemove({ _id: recordId, userId })
+    .then(() => res.redirect('/'))
+    .catch(console.error)
+})
 
 module.exports = router
