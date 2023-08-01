@@ -65,10 +65,7 @@ db.once('open', () => {
       console.log(data)
       for (let i = 0; i < recordList.length; i++) {
         recordList[i].categoryId = data[i]._id
-        recordList[i].categoryIcon = data[i].icon
-        console.log(recordList[i])
-        console.log(recordList[i].categoryId)
-        console.log(recordList[i].categoryIcon)
+        recordList[i].categoryIcon = data[i].icon      
       }
       return Promise.all(Array.from({ length: userList.length }, (_, i) => {
         return bcrypt
