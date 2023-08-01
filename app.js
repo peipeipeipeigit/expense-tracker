@@ -7,6 +7,9 @@ const exphbs = require('express-handlebars')
 const app = express()
 const port = process.env.PORT || 3000
 const routes = require('./routes')
+const methodOverride = require('method-override')
+
+
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -26,6 +29,9 @@ app.use(session({
   saveUninitialized: true
 }))
 
+// setting method-override
+app.use(methodOverride('_method'))
+
 // setting body-parser
 app.use(express.urlencoded({ extended: true }))
 
@@ -35,9 +41,12 @@ app.use(express.static('public'))
 usePassport(app)
 app.use(flash())
 app.use((req, res, next) => {
-  console.log(req.user)
+  
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  // console.log(req.user)
+  // console.log('res.locals:', res.locals)
+  res.locals.error = req.flash('error')
   res.locals.success_msg = req.flash('success_msg')  
   res.locals.warning_msg = req.flash('warning_msg')
   next()
@@ -48,5 +57,5 @@ app.use(routes)
 
 // Listen the server
 app.listen(port, () => {
-  console.log(`Express is running on http://localhost:${port}`)
+  console.log(`Expense tracker is running on http://localhost:${port}`)
 })

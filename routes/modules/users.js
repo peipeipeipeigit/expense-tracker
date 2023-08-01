@@ -11,7 +11,8 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/users/login'
+  failureRedirect: '/users/login',
+  failureFlash: true // 啟用flash message
 }))
 
 
@@ -21,6 +22,7 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
+  console.log(req.body)
   const errors = []
 
   // flash message推播內容條件式
@@ -53,19 +55,20 @@ router.post('/register', (req, res) => {
           password,
           confirmPassword
         })
+      } else {
+        return bcrypt
+          .genSalt(10)
+          .then(salt => bcrypt.hash(password, salt))
+          .then(hash => User.create({
+            name,
+            email,
+            password: hash
+          }))
+          .then(() => res.redirect('/'))
+          .catch(err => console.log(err))
       }
-      return bcrypt
-        .genSalt(10)
-        .then(salt => bcrypt.hash(password, salt))
-        .then(hash => User.create({
-          name,
-          email,
-          password: hash
-        }))
-        .then(() => res.redirect('/'))
-        .catch(err => console.log(err))
     })
-    .catch(err => console.log(err))
+
 })
 
 
