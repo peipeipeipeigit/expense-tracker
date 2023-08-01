@@ -8,20 +8,38 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 
 
-// 
-
-// browse a specific record
-router.get('/:id', (req, res) => {
-  const userId = req.user._id
-  const _id = req.params.id
-  return Record.findOne({ _id, userId })
-    .lean()
-    .then(record => res.render('detail', { record }))
-    .catch(error => console.log(error))
+// add a new record
+router.get('/new', (req, res) => {
+  res.render('new')
 })
 
+router.post('/new', (req, res) => {
+  const userId = req.user._id
+  const { name, date, category, amount } = req.body
+  console.log(req.body)
+  const error = []
+  if (!name || !date || !category || !amount) {
+    error.push({ message: '所有欄位都是必填' })
+    return res.render('new', {
+      error,
+      name,
+      date,
+      category,
+      amount
+    })
+  }
+  Category.findOne({ name: category })
+    .then(data => {
+      const categoryId = data._id
+      return Record.create({ name, date, category, categoryIcon: data.icon, amount, userId, categoryId })
+    })
+    .then(() => res.redirect('/'))
+    .catch(console.error)
+})
+
+
 // edit a specific record
-router.get('/:id/edit', (req, res) => {
+router.get('/edit/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
   return Record.findOne({ _id, userId })
@@ -30,7 +48,7 @@ router.get('/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-router.put('/:id', (req, res) => {
+router.post('/edit/:id', (req, res) => {
   const userId = req.user._id
   const _id = req.params.id
   const { name, amount } = req.body
@@ -44,18 +62,7 @@ router.put('/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// add a new record
-router.get('/new', (req, res) => {
-  res.render('new')
-})
 
-router.post('/new', (req, res) => {
-  const userId = req.user._id
-  const name = req.body.name
-  return Record.create({ name, userId })
-    .then(() => res.redirect('/'))
-    .catch(error => console.log(error))
-})
 
 
 // delete a record

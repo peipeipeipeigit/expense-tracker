@@ -13,12 +13,12 @@
             {{/if}}
           </p>
         </button>
-      <ul class="dropdown-menu w-100 text-center">
-        <li><a class="dropdown-item" href="/">所有類別</a></li>
-        {{#each category}}
-        <li><a class="dropdown-item" href="/{{ this.name }}">{{ this.name }}</a></li>
-        {{/each}}
-      </ul>
+        <ul class="dropdown-menu w-100 text-center">
+          <li><a class="dropdown-item" href="/">所有類別</a></li>
+          {{#each category}}
+          <li><a class="dropdown-item" href="/categoryFilter/{{ this.name }}">{{ this.name }}</a></li>
+          {{/each}}
+        </ul>
       </div>
     </li>
     {{#if records}}
@@ -55,7 +55,8 @@
         </div>
         <div class="col-auto my-auto w-25 text-end">
           <a class="btn btn-outline-warning" href="/records/{{ this._id }}/edit">修改</a>
-          <form action="/records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+          <form action="/records/delete/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+          {{> message}}
             <button class="btn btn-outline-danger" type="submit">刪除</button>
           </form>
         </div>
@@ -66,5 +67,7 @@
     <h1 class="text-danger mt-3">查無支出紀錄</h1>
     {{/if}}
   </ul>
-  <a href="/records/new" class="btn btn-outline-primary d-flex justify-content-center  my-5">新增支出</a>
+  <form action="/records/new" method="GET">
+  <button type="submit" class="btn btn-outline-primary px-5 mt-3">新增支出</button>
+  </form>
 </div>

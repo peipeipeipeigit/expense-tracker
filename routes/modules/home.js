@@ -6,7 +6,7 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 
 // 選取篩選分類
-router.get('/:category', (req, res) => {
+router.get('/categoryFilter/:category', (req, res) => {
   const selectedCategory = req.params.category
   const userId = req.user._id
   let totalAmount = 0
